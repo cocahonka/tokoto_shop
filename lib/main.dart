@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokoto_shop/constants.dart';
+import 'package:tokoto_shop/routs.dart';
 import 'package:tokoto_shop/screens/splash/splash_screen.dart';
 
 void main() {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      initialRoute: SplashScreen.routeName,
+      routes: routes,
     );
   }
 }
