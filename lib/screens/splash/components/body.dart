@@ -39,47 +39,56 @@ class _BodyState extends State<Body> {
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              flex: 3,
-              child: PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value;
-                  });
-                },
-                itemCount: splashData.length,
-                itemBuilder: (context, index) => SplashContent(
-                  text: splashData[index].text,
-                  image: splashData[index].image,
+            Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: PageView.builder(
+                    onPageChanged: (value) {
+                      setState(() {
+                        currentPage = value;
+                      });
+                    },
+                    itemCount: splashData.length,
+                    itemBuilder: (context, index) => SplashContent(
+                      text: splashData[index].text,
+                      image: splashData[index].image,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(20)),
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        splashData.length,
-                        (index) => buildDot(index: index),
-                      ),
+            Column(
+              children: [
+                const Spacer(flex: 3),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(20)),
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            splashData.length,
+                            (index) => buildDot(index: index),
+                          ),
+                        ),
+                        const Spacer(flex: 3),
+                        DefaultButton(
+                          text: 'Continue',
+                          press: () {},
+                        ),
+                        const Spacer(),
+                      ],
                     ),
-                    const Spacer(flex: 3),
-                    DefaultButton(
-                      text: 'Continue',
-                      press: () {},
-                    ),
-                    const Spacer(),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

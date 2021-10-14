@@ -35,6 +35,7 @@ class SplashContent extends StatelessWidget {
           height: getProportionateScreenHeight(265),
           width: getProportionateScreenWidth(235),
         ),
+        const Spacer(flex: 6),
       ],
     );
   }
