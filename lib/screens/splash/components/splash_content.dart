@@ -16,26 +16,33 @@ class SplashContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Spacer(),
-        Text(
-          'TOKOTO',
-          style: TextStyle(
-            fontSize: getProportionateScreenWidth(36),
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          flex: 3,
+          child: Column(
+            children: [
+              const Spacer(),
+              Text(
+                'TOKOTO',
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(36),
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                text,
+                textAlign: TextAlign.center,
+              ),
+              const Spacer(flex: 2),
+              Image.asset(
+                image,
+                height: getProportionateScreenHeight(265),
+                width: getProportionateScreenWidth(235),
+              ),
+            ],
           ),
         ),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-        ),
-        const Spacer(flex: 2),
-        Image.asset(
-          image,
-          height: getProportionateScreenHeight(265),
-          width: getProportionateScreenWidth(235),
-        ),
-        const Spacer(flex: 6),
+        const Expanded(child: Spacer(flex: 2)),
       ],
     );
   }

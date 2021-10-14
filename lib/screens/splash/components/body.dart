@@ -17,12 +17,15 @@ class SplashData {
   final String text;
   final String image;
 
-  const SplashData({required this.text, required this.image});
+  const SplashData({
+    required this.text,
+    required this.image,
+  });
 }
 
 class _BodyState extends State<Body> {
-  int currentPage = 0;
-  List<SplashData> splashData = const [
+  int _currentPage = 0;
+  static const List<SplashData> _splashData = [
     SplashData(
         text: 'Welcome to Tokoto, Let’s shop!',
         image: 'assets/images/splash_1.png'),
@@ -41,28 +44,21 @@ class _BodyState extends State<Body> {
         width: double.infinity,
         child: Stack(
           children: [
-            Column(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: PageView.builder(
-                    onPageChanged: (value) {
-                      setState(() {
-                        currentPage = value;
-                      });
-                    },
-                    itemCount: splashData.length,
-                    itemBuilder: (context, index) => SplashContent(
-                      text: splashData[index].text,
-                      image: splashData[index].image,
-                    ),
-                  ),
-                ),
-              ],
+            PageView.builder(
+              onPageChanged: (value) {
+                setState(() {
+                  _currentPage = value;
+                });
+              },
+              itemCount: _splashData.length,
+              itemBuilder: (context, index) => SplashContent(
+                text: _splashData[index].text,
+                image: _splashData[index].image,
+              ),
             ),
             Column(
               children: [
-                const Spacer(flex: 3),
+                const Expanded(child: Spacer(flex: 3)),
                 Expanded(
                   flex: 2,
                   child: Padding(
@@ -74,7 +70,7 @@ class _BodyState extends State<Body> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
-                            splashData.length,
+                            _splashData.length,
                             (index) => buildDot(index: index),
                           ),
                         ),
@@ -101,9 +97,9 @@ class _BodyState extends State<Body> {
       duration: kAnimationDuration,
       margin: const EdgeInsets.only(right: 5),
       height: 6,
-      width: currentPage == index ? 20 : 6,
+      width: _currentPage == index ? 20 : 6,
       decoration: BoxDecoration(
-        color: currentPage == index ? kPrimaryColor : const Color(0xFFD8D8D8),
+        color: _currentPage == index ? kPrimaryColor : const Color(0xFFD8D8D8),
         borderRadius: BorderRadius.circular(3),
       ),
     );
