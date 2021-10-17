@@ -25,7 +25,6 @@ class SplashContent extends StatelessWidget {
                 'TOKOTO',
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(36),
-                  //fontSize: getProportionateOverallSize(width: 36, height: 72),
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                 ),
