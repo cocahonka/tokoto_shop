@@ -3,6 +3,7 @@ import 'package:tokoto_shop/components/custom_suffix_icon.dart';
 import 'package:tokoto_shop/components/default_button.dart';
 import 'package:tokoto_shop/components/form_error.dart';
 import 'package:tokoto_shop/screens/forgot_password/forgot_password_screen.dart';
+import 'package:tokoto_shop/screens/login_success/login_success_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -17,7 +18,9 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
+  // ignore: unused_field
   String? _email;
+  // ignore: unused_field
   String? _password;
   bool _remember = false;
   @override
@@ -60,6 +63,8 @@ class _SignInFormState extends State<SignInForm> {
             press: () {
               if (_formKey.currentState?.validate() ?? false) {
                 _formKey.currentState?.save();
+                // if all are valid then go to success screen
+                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
           ),
