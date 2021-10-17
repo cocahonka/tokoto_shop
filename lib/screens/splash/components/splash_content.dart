@@ -16,7 +16,7 @@ class SplashContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
+        Flexible(
           flex: 3,
           child: Column(
             children: [
@@ -25,6 +25,7 @@ class SplashContent extends StatelessWidget {
                 'TOKOTO',
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(36),
+                  //fontSize: getProportionateOverallSize(width: 36, height: 72),
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -36,13 +37,14 @@ class SplashContent extends StatelessWidget {
               const Spacer(flex: 2),
               Image.asset(
                 image,
+                fit: BoxFit.scaleDown,
                 height: getProportionateScreenHeight(265),
                 width: getProportionateScreenWidth(235),
               ),
             ],
           ),
         ),
-        const Expanded(child: Spacer(flex: 2)),
+        const Spacer(flex: 2),
       ],
     );
   }
