@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tokoto_shop/components/custom_suffix_icon.dart';
 import 'package:tokoto_shop/components/default_button.dart';
 import 'package:tokoto_shop/components/form_error.dart';
+import 'package:tokoto_shop/screens/forgot_password/forgot_password_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -42,9 +43,13 @@ class _SignInFormState extends State<SignInForm> {
               ),
               const Text('Remember me'),
               const Spacer(),
-              const Text(
-                'Forgot Password',
-                style: TextStyle(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(
+                    context, ForgotPasswordScreen.routeName),
+                child: const Text(
+                  'Forgot Password',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
               ),
             ],
           ),

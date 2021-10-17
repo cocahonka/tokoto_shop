@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tokoto_shop/components/no_account_text.dart';
 import 'package:tokoto_shop/components/social_card.dart';
-import 'package:tokoto_shop/constants.dart';
 import 'package:tokoto_shop/screens/sign_in/components/sign_form.dart';
 import 'package:tokoto_shop/size_config.dart';
 
@@ -53,24 +53,7 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account? ',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                      ),
-                    ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
+                const NoAccountText(),
               ],
             ),
           ),
