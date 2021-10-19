@@ -38,4 +38,5 @@ final inputDecorationTheme = InputDecorationTheme(
   enabledBorder: _outlineInputBorder,
   focusedBorder: _outlineInputBorder,
   border: _outlineInputBorder,
+  errorStyle: const TextStyle(height: 0),
 );

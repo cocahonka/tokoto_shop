@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tokoto_shop/components/custom_suffix_icon.dart';
 import 'package:tokoto_shop/components/default_button.dart';
 import 'package:tokoto_shop/components/form_error.dart';
+import 'package:tokoto_shop/components/form_fields.dart';
 import 'package:tokoto_shop/components/no_account_text.dart';
 import 'package:tokoto_shop/size_config.dart';
-
-import '../../../constants.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -52,7 +50,7 @@ class ForgotPasswordForm extends StatefulWidget {
 
 class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   final _formKey = GlobalKey<FormState>();
-  List<String> errors = [];
+  final List<String> errors = [];
   // ignore: unused_field
   String? _email;
   @override
@@ -61,46 +59,13 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
       key: _formKey,
       child: Column(
         children: [
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (value) => _email = value,
-            onChanged: (value) {
-              if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-                setState(() {
-                  errors.remove(kEmailNullError);
-                });
-              }
-              if (errors.contains(kInvalidEmailError) ||
-                  (emailValidatorRegExp.hasMatch(value) &&
-                      errors.contains(kInvalidEmailError))) {
-                setState(() {
-                  errors.remove(kInvalidEmailError);
-                });
-              }
-            },
-            validator: (value) {
-              if ((value?.isEmpty ?? true) &&
-                  !errors.contains(kEmailNullError)) {
-                setState(() {
-                  errors.add(kEmailNullError);
-                });
-              }
-              if (!errors.contains(kEmailNullError) &&
-                  !errors.contains(kInvalidEmailError) &&
-                  value != null &&
-                  !emailValidatorRegExp.hasMatch(value)) {
-                setState(() {
-                  errors.add(kInvalidEmailError);
-                });
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              hintText: 'Enter your email',
-              suffixIcon: CustomSuffixIcon(svgIcon: 'assets/icons/Mail.svg'),
-            ),
-          ),
+          EmailFormField(
+              errors: errors,
+              onSaved: (value) {
+                _email = value;
+              },
+              setState: setState),
+          // This ^ ^ ^
           SizedBox(height: getProportionateScreenHeight(30)),
           FormError(errors: errors),
           SizedBox(height: SizeConfig.screenHeight * 0.1),

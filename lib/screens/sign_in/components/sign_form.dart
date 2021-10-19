@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tokoto_shop/components/custom_suffix_icon.dart';
 import 'package:tokoto_shop/components/default_button.dart';
 import 'package:tokoto_shop/components/form_error.dart';
+import 'package:tokoto_shop/components/form_fields.dart';
 import 'package:tokoto_shop/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tokoto_shop/screens/login_success/login_success_screen.dart';
 
@@ -29,9 +29,20 @@ class _SignInFormState extends State<SignInForm> {
       key: _formKey,
       child: Column(
         children: [
-          buildEmailFormField(),
+          EmailFormField(
+            errors: errors,
+            onSaved: (value) {
+              _email = value;
+            },
+            setState: setState,
+          ),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildPasswordFormField(),
+          PasswordFormField(
+              errors: errors,
+              onSaved: (value) {
+                _password = value;
+              },
+              setState: setState),
           SizedBox(height: getProportionateScreenHeight(30)),
           Row(
             children: [
@@ -69,90 +80,6 @@ class _SignInFormState extends State<SignInForm> {
             },
           ),
         ],
-      ),
-    );
-  }
-
-  TextFormField buildPasswordFormField() {
-    return TextFormField(
-      obscureText: true,
-      onSaved: (value) => _password = value,
-      onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
-          setState(() {
-            errors.remove(kPassNullError);
-          });
-        }
-        if (errors.contains(kPassNullError) ||
-            (value.length >= kMinPasswordLength &&
-                errors.contains(kShortPassError))) {
-          setState(() {
-            errors.remove(kShortPassError);
-          });
-        }
-      },
-      validator: (value) {
-        if ((value?.isEmpty ?? true) && !errors.contains(kPassNullError)) {
-          setState(() {
-            errors.add(kPassNullError);
-          });
-        }
-        if (!errors.contains(kPassNullError) &&
-            !errors.contains(kShortPassError) &&
-            value != null &&
-            value.length < kMinPasswordLength) {
-          setState(() {
-            errors.add(kShortPassError);
-          });
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: 'Password',
-        hintText: 'Enter your password',
-        suffixIcon: CustomSuffixIcon(svgIcon: 'assets/icons/Lock.svg'),
-      ),
-    );
-  }
-
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) => _email = value,
-      onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-          setState(() {
-            errors.remove(kEmailNullError);
-          });
-        }
-        if (errors.contains(kInvalidEmailError) ||
-            (emailValidatorRegExp.hasMatch(value) &&
-                errors.contains(kInvalidEmailError))) {
-          setState(() {
-            errors.remove(kInvalidEmailError);
-          });
-        }
-      },
-      validator: (value) {
-        if ((value?.isEmpty ?? true) && !errors.contains(kEmailNullError)) {
-          setState(() {
-            errors.add(kEmailNullError);
-          });
-        }
-        if (!errors.contains(kEmailNullError) &&
-            !errors.contains(kInvalidEmailError) &&
-            value != null &&
-            !emailValidatorRegExp.hasMatch(value)) {
-          setState(() {
-            errors.add(kInvalidEmailError);
-          });
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: 'Email',
-        hintText: 'Enter your email',
-        suffixIcon: CustomSuffixIcon(svgIcon: 'assets/icons/Mail.svg'),
       ),
     );
   }
